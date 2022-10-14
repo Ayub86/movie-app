@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 import { Routes, Route } from "react-router-dom";
+=======
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
+>>>>>>> 3820ebc63b6ccc38a95ab31bf720b0fdf3ca4e52
 import Home from "./components/container/Home/Home";
 import LogIn from "./components/container/Login/Login";
 import Register from "./components/container/Register/Register";
