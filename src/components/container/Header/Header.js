@@ -1,11 +1,11 @@
-import user from "../../images/user.png"
+import "../../../assests/scss/Header.scss"
+import user from "../../../assests/images/user.png"
 import { Link } from "react-router-dom"
-import "./Header.scss"
 import { useState } from "react"
 import {
     fetchAsyncMovies,
     fetchAsyncShows,
-} from "../../features/movies/movieSlice"
+} from "../../../redux/features/movies/movieSlice"
 import { useDispatch } from "react-redux"
 
 const Header = () => {
@@ -23,9 +23,31 @@ const Header = () => {
         <div className="header">
 
             <div className="logo">
-                <Link to="/">
-                    IMDb
-                </Link>
+
+                <ul>
+                    <li>
+                        <Link to="/">
+                            IMDb
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/allmovies">
+                            All Movies
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/mymovies">
+                            My Movies
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/addmovies">
+                            Add Movie
+                        </Link>
+                    </li>
+                </ul>
+
+
             </div>
             <div className="search-bar">
                 <form onSubmit={submitHandle}>

@@ -4,13 +4,18 @@ import { Controller, useForm } from "react-hook-form";
 import { Typography } from "@mui/material";
 import "../../../assest/form.css"
 import axios from "axios";
+import * as yup from 'yup';
+import useYupValidationResolver from "../../../ValidationSchema";
 
 const ForgotPassword = () => {
-  const { handleSubmit, control } = useForm();
+  const validationSchema = yup.object({
+		email: yup.string().email('Invalid email format').required('Required'),
+	});
+	const resolver = useYupValidationResolver(validationSchema)
+  const { handleSubmit, control } = useForm({resolver});
 
   const onSubmit = (data) => {
-    axios
-      .post("https://whipz.herokuapp.com/api/v1/user/forgot-password", data)
+    axios.post("https://whipz.herokuapp.com/api/v1/user/forgot-password", data)
       .then((response) => {
         console.log("---res", response);
         let message = response?.data?.message;

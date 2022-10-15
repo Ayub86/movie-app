@@ -1,16 +1,23 @@
 import React from "react";
-import { Button, TextField } from "@mui/material";
+import {  TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { Typography } from "@mui/material";
 import "../../../assest/form.css"
 import axios from "axios";
+import * as yup from 'yup';
+import useYupValidationResolver from "../../../ValidationSchema";
 
 const LogIn = () => {
-  const { handleSubmit, control } = useForm();
+  const validationSchema = yup.object({
+		email: yup.string().email('Invalid email format').required('Required'),
+		password: yup.string().min(6).required("Required"),
+
+	});
+	const resolver = useYupValidationResolver(validationSchema)
+  const { handleSubmit, control } = useForm({resolver});
 
   const onSubmit = (data) => {
-    axios
-      .post("https://whipz.herokuapp.com/api/v1/user/login", data)
+    axios.post("https://whipz.herokuapp.com/api/v1/user/login", data)
       .then((response) => {
         console.log("---res", response);
         let message = response?.data?.message;
@@ -76,12 +83,12 @@ const LogIn = () => {
                   placeholder="eg: PassLogin%7"
                 />
               )}
-              rules={{ required: "Password Required" }}
+             // rules={{ required: "Password Required" }}
             />
           </div>
 
           <div className="d-flex justify-content-center mt-4">
-            <Button onClick={handleSubmit(onSubmit)}>Submit</Button>
+            <button className="btn btn-primary btn-lg  btn-block" onClick={handleSubmit(onSubmit)}>Submit</button>
           </div>
         </form>
       </div>
