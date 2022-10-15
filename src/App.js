@@ -15,22 +15,22 @@ import "./assests/scss/App.scss"
 function App() {
   return (
     <>
- <div className="app">
-      <Header />
-      <div className="container">
-        <Routes>
-          <Route path="/login" element={<LogIn />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password/:otp" element={<ResetPassword />} />
-          <Route path="/verification" element={<Verification />} />
-          <Route path="/movie/:imdbID" element={<MovieDetail />} />
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
+      <div className="app">
+        <Header />
+        <div className="container">
+          <Routes>
+            <Route path="/login" element={<LogIn />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password/:otp" element={<ResetPassword />} />
+            <Route path="/verification" element={<Verification />} />
+            <Route path="/movie/:imdbID" element={<MovieDetail />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
         </div>
         <Footer />
-        </div>
+      </div>
     </>
   );
 }
