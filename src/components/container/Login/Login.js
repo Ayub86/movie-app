@@ -1,20 +1,16 @@
-import React from "react";
-import {  TextField } from "@mui/material";
+import React, { useEffect } from "react";
+import { Button, TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
 import { Typography } from "@mui/material";
-import "../../../assest/form.css"
+import "../../../assest/form.scss";
+import "../../../assest/scss/login.scss";
 import axios from "axios";
-import * as yup from 'yup';
-import useYupValidationResolver from "../../../ValidationSchema";
 
+
+const clientId = '350668127338-1dqriq4bcnqtn4dmuvp3pfj2h1jil4fg.apps.googleusercontent.com';
 const LogIn = () => {
-  const validationSchema = yup.object({
-		email: yup.string().email('Invalid email format').required('Required'),
-		password: yup.string().min(6).required("Required"),
-
-	});
-	const resolver = useYupValidationResolver(validationSchema)
-  const { handleSubmit, control } = useForm({resolver});
+  const { handleSubmit, control } = useForm();
 
   const onSubmit = (data) => {
     console.log(data)
@@ -25,7 +21,7 @@ const LogIn = () => {
         //console.log(message);
         alert(`${message}`);
         //setIsloading(false);
-        // navigate("/login")
+        Navigate("/")
       })
       .catch((error) => {
         let message = error?.response?.data?.message;
@@ -91,10 +87,28 @@ const LogIn = () => {
           <div className="d-flex justify-content-center mt-4">
             <button className="btn btn-primary btn-lg  btn-block" onClick={handleSubmit(onSubmit)}>Submit</button>
           </div>
+          <div className="signup-link">
+            <Link to="/register">
+              Sign Up?
+            </Link>
+          </div>
+          <div>
+            <GoogleLogin
+              clientId={clientId}
+              buttonText="Google"
+              onSuccess={onSuccess}
+              onFailure={onFailure}
+              cookiePolicy={'single_host_origin'}
+              style={{ marginTop: '100px' }}
+              isSignedIn={true}
+            />
+          </div>
         </form>
+
       </div>
+
     </>
   );
-};
 
+}
 export default LogIn;
