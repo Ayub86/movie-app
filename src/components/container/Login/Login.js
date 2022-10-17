@@ -17,7 +17,8 @@ const LogIn = () => {
   const { handleSubmit, control } = useForm({resolver});
 
   const onSubmit = (data) => {
-    axios.post("https://whipz.herokuapp.com/api/v1/user/login", data)
+    console.log(data)
+    axios.post("https://uploadmoviesapp.herokuapp.com/director/login", data)
       .then((response) => {
         console.log("---res", response);
         let message = response?.data?.message;

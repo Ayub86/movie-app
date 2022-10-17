@@ -15,6 +15,7 @@ const ForgotPassword = () => {
   const { handleSubmit, control } = useForm({resolver});
 
   const onSubmit = (data) => {
+    console.log(data,"for")
     axios.post("https://whipz.herokuapp.com/api/v1/user/forgot-password", data)
       .then((response) => {
         console.log("---res", response);
