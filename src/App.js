@@ -9,28 +9,28 @@ import MovieDetail from "./components/container/MovieDetail/MovieDetail"
 import PageNotFound from "./components/container/PageNotFound/PageNotFound"
 import Footer from "./components/container/Footer/Footer"
 import Header from "./components/container/Header/Header"
-import "./assests/scss/App.scss"
-
+import "./assest/scss/App.scss"
+import MyMovies from "./components/container/MyMovies/MyMovies";
+import AddMovie from "./components/container/AddMovie/AddMovie";
 
 function App() {
   return (
     <>
- <div className="app">
-      <Header />
-      <div className="container">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<LogIn />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password/:otp" element={<ResetPassword />} />
-          <Route path="/verification" element={<Verification />} />
-          <Route path="/movie/:imdbID" element={<MovieDetail />} />
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
+      <div className="app">
+        <Header />
+        <div className="container">
+          <Routes>
+            <Route path="/login" element={<LogIn />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password/:otp" element={<ResetPassword />} />
+            <Route path="/verification" element={<Verification />} />
+            <Route path="/movie/:imdbID" element={<MovieDetail />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
         </div>
         <Footer />
-        </div>
+      </div>
     </>
   );
 }

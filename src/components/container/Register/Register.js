@@ -2,20 +2,22 @@ import React from "react";
 import { Button, TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { Typography } from "@mui/material";
-import "../../../assest/form.css"
+import "../../../assest/form.scss"
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const Register = () => {
   const { handleSubmit, control } = useForm();
-
+const navigate = useNavigate()
   const onSubmit = (data) =>{
-    axios.post("https://whipz.herokuapp.com/api/v1/user/signup", data)
+    console.log(data);
+    axios.post("https://uploadmoviesapp.herokuapp.com/director/register", data)
     .then((response) => {
       console.log("---res", response);
       let message = response?.data?.message;
       //console.log(message);
       alert(`${message}`);
       //setIsloading(false);
-     // navigate("/login")
+     navigate("/login")
 
 
     }).catch((error) => {
@@ -72,12 +74,12 @@ const Register = () => {
        
         <div className="col mt-4">
          <Controller
-          name="confirm_password"
+          name="phone_number"
           control={control}
           defaultValue=""
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <TextField
-              label="Confirm Password"
+              label="Phone No"
               variant="outlined"
               value={value}
               fullWidth={true}

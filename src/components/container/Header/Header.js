@@ -1,5 +1,4 @@
-import "../../../assests/scss/Header.scss"
-import user from "../../../assests/images/user.png"
+import "../../../assest/scss/Header.scss"
 import { Link } from "react-router-dom"
 import { useState } from "react"
 import {
@@ -7,6 +6,8 @@ import {
     fetchAsyncShows,
 } from "../../../redux/features/movies/movieSlice"
 import { useDispatch } from "react-redux"
+import user from "../../../assest/images/user.png"
+
 
 const Header = () => {
     const [term, setTerm] = useState("")
@@ -17,19 +18,21 @@ const Header = () => {
         dispatch(fetchAsyncMovies(term))
         dispatch(fetchAsyncShows(term))
         setTerm("")
-
     }
+
     return (
         <div className="header">
 
-            <div className="logo">
+            <div className="logo-main">
 
+                <Link to="/">
+                    IMDb
+                </Link>
+            </div>
+
+            <div className="logo">
                 <ul>
-                    <li>
-                        <Link to="/">
-                            IMDb
-                        </Link>
-                    </li>
+
                     <li>
                         <Link to="/allmovies">
                             All Movies
@@ -50,16 +53,30 @@ const Header = () => {
 
             </div>
             <div className="search-bar">
+
                 <form onSubmit={submitHandle}>
+
                     <input
-                        type="text" value={term}
+                        type="search"
+                        value={term}
                         placeholder="Search Movies or Shows"
-                        onChange={(e) => setTerm(e.target.value)} />
-                    <button type="sumbit"><i className="fa fa-search"></i></button>
+                        onChange={(e) => setTerm(e.target.value)}
+                        required />
+                    <i class="fa fa-search"></i>
+
                 </form>
             </div>
+
             <div className="user-image">
-                <img src={user} alt="user" />
+                <ul className="drop-down">
+                    <img src={user} alt="user" />
+                    <li>
+                        Profile
+                    </li>
+                    <li>
+                        LogOut
+                    </li>
+                </ul>
             </div>
         </div>
     );
