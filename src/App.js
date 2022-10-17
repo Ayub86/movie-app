@@ -25,10 +25,6 @@ function App() {
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password/:otp" element={<ResetPassword />} />
             <Route path="/verification" element={<Verification />} />
-            <Route path="/" element={<Home />} />
-            <Route path="/allmovies" element={<Home />} />
-            <Route path="/mymovies" element={<MyMovies />} />
-            <Route path="/addmovie" element={<AddMovie />} />
             <Route path="/movie/:imdbID" element={<MovieDetail />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
