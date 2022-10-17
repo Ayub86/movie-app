@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { Typography } from "@mui/material";
-import "../../../assest/form.css"
+import "../../../assest/form.scss"
 import axios from "axios";
 
 const ResetPassword = () => {

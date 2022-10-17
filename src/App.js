@@ -9,8 +9,9 @@ import MovieDetail from "./components/container/MovieDetail/MovieDetail"
 import PageNotFound from "./components/container/PageNotFound/PageNotFound"
 import Footer from "./components/container/Footer/Footer"
 import Header from "./components/container/Header/Header"
-import "./assests/scss/App.scss"
-
+import "./assest/scss/App.scss"
+import MyMovies from "./components/container/MyMovies/MyMovies";
+import AddMovie from "./components/container/AddMovie/AddMovie";
 
 function App() {
   return (
@@ -20,11 +21,14 @@ function App() {
         <div className="container">
           <Routes>
             <Route path="/login" element={<LogIn />} />
-            <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password/:otp" element={<ResetPassword />} />
             <Route path="/verification" element={<Verification />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/allmovies" element={<Home />} />
+            <Route path="/mymovies" element={<MyMovies />} />
+            <Route path="/addmovie" element={<AddMovie />} />
             <Route path="/movie/:imdbID" element={<MovieDetail />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>

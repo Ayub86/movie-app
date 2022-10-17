@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { Typography } from "@mui/material";
-import "../../../assest/form.css"
+import "../../../assest/form.scss"
 import axios from "axios";
 
 const ForgotPassword = () => {
@@ -10,7 +10,7 @@ const ForgotPassword = () => {
 
   const onSubmit = (data) => {
     axios
-      .post("https://whipz.herokuapp.com/api/v1/user/forgot-password", data)
+      .post("https://uploadmoviesapp.herokuapp.com/director/forgotPassword", data)
       .then((response) => {
         console.log("---res", response);
         let message = response?.data?.message;
@@ -56,7 +56,6 @@ const ForgotPassword = () => {
               rules={{ required: "E-Mail Required" }}
             />
           </div>
-         
 
           <div className="d-flex justify-content-center mt-4">
             <Button onClick={handleSubmit(onSubmit)}>Submit</Button>
