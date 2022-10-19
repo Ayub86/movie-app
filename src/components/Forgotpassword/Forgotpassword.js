@@ -2,40 +2,32 @@ import React from 'react'
 import { Button, TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { Typography } from "@mui/material";
-import "../../../assest/form.css"
-import axios from "axios";
-import * as yup from 'yup';
-import useYupValidationResolver from "../../../ValidationSchema";
-import API from "../../../utlis/apis/movieApi"
+import "../../assest/form.scss"
+import API from "../../utlis/API"
+import { useNavigate } from "react-router-dom";
 
 const ForgotPassword = () => {
-  const validationSchema = yup.object({
-		email: yup.string().email('Invalid email format').required('Required'),
-	});
-	const resolver = useYupValidationResolver(validationSchema)
-  const { handleSubmit, control } = useForm({resolver});
+  const { handleSubmit, control } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data,"for")
-    API.post("/director/forgotPassword", data)
+    axios
+      .post("https://uploadmoviesapp.herokuapp.com/director/forgotPassword", data)
       .then((response) => {
         console.log("---res", response);
         let message = response?.data?.message;
         //console.log(message);
         alert(`${message}`);
-        //setIsloading(false);
-        // navigate("/login")
+        navigate("/verification")
       })
       .catch((error) => {
         let message = error?.response?.data?.message;
         console.log(message);
         alert(`${message}`);
-        //setIsloading(false);
       });
   };
   return (
     <>
-     <div className="form shadow-lg p-3 mb-5 bg-white rounded">
+      <div className="form shadow-lg p-3 mb-5 bg-white rounded">
         <form>
           <Typography variant="h6" className="text-center">
             Please Enter E-Mail
@@ -70,9 +62,7 @@ const ForgotPassword = () => {
         </form>
       </div>
     </>
-  
-      
-  
+
   )
 }
 
