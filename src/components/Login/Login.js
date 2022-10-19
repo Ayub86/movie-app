@@ -3,67 +3,41 @@ import { Button, TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { Typography } from "@mui/material";
-import "../../../assest/form.scss";
-import "../../../assest/scss/login.scss";
-import axios from "axios";
-import { GoogleLogin } from 'react-google-login';
-import { gapi } from 'gapi-script'
+import "../../assest/form.scss";
+import "../../assest/scss/login.scss";
+// import API from "../../utlis/API"
+import { useDispatch, useSelector } from "react-redux"
+import { fetchAsyncLogin } from "../../redux/features/movies/movieSlice"
 
 
-const clientId = '350668127338-1dqriq4bcnqtn4dmuvp3pfj2h1jil4fg.apps.googleusercontent.com';
 const LogIn = () => {
-  const Navigate = useNavigate()
-  const onSuccess = (res) => {
-    console.log('Login Success.', res.profileObj);
-    alert(
-      `Logged in successfully.`
-    );
-    Navigate("/")
-    // <Navigate to='/'/>
-  };
-
-  const onFailure = (res) => {
-    console.log('Login failed.', res);
-    alert(
-      `Failed to login.`
-    );
-  };
-
-  useEffect(() => {
-    function start() {
-      gapi.client.init({
-        clientId: clientId,
-        scope: ""
-      })
-    }
-    gapi.load('client:auth2', start)
-  })
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const { handleSubmit, control } = useForm();
-
+  const {success,user} = useSelector((state)=>state.movies)
   const onSubmit = (data) => {
-    axios
-      .post("https://whipz.herokuapp.com/api/v1/user/login", data)
-      .then((response) => {
-        console.log("---res", response);
-        let message = response?.data?.message;
-        //console.log(message);
-        alert(`${message}`);
-        //setIsloading(false);
-        Navigate("/")
-      })
-      .catch((error) => {
-        let message = error?.response?.data?.message;
-        console.log(message);
-        alert(`${message}`);
-        //setIsloading(false);
-      });
+    const { email, password } = data
+    console.log(data,"logindata")
+    dispatch(fetchAsyncLogin({ email, password }))
   };
+
+  const authToken = localStorage.getItem("token")
+  console.log(user,"user");
+
+  // useEffect(() => {
+  //   // console.log("AuthToken", authToken)
+  //   if (success) {
+  //     navigate("/")
+  //   }
+  // }, [])
+
+
   return (
     <>
       <div className="form shadow-lg p-3 mb-5 bg-white rounded">
         <form>
-          <Typography variant="h3" className="text-center">
+          <Typography variant="h4" className="text-center">
             Login
           </Typography>
           <div className="col mt-4">
@@ -120,17 +94,6 @@ const LogIn = () => {
             <Link to="/register">
               Sign Up?
             </Link>
-          </div>
-          <div>
-            <GoogleLogin
-              clientId={clientId}
-              buttonText="Google"
-              onSuccess={onSuccess}
-              onFailure={onFailure}
-              cookiePolicy={'single_host_origin'}
-              style={{ marginTop: '100px' }}
-              isSignedIn={true}
-            />
           </div>
         </form>
 

@@ -1,17 +1,22 @@
 import { Routes, Route } from "react-router-dom";
-import Home from "./components/container/Home/Home";
-import LogIn from "./components/container/Login/Login";
-import Register from "./components/container/Register/Register";
-import ForgotPassword from "./components/container/Forgotpassword/Forgotpassword";
-import ResetPassword from "./components/container/ResetPassword/Reset";
-import Verification from "./components/container/Verification/Verification";
-import MovieDetail from "./components/container/MovieDetail/MovieDetail"
-import PageNotFound from "./components/container/PageNotFound/PageNotFound"
-import Footer from "./components/container/Footer/Footer"
-import Header from "./components/container/Header/Header"
+import Home from "./container/Home/Home";
+import LogIn from "./components/Login/Login";
+import Register from "./components/Register/Register";
+import ForgotPassword from "./components/Forgotpassword/Forgotpassword";
+import ResetPassword from "./components/ResetPassword/Reset";
+import Verification from "./components/Verification/Verification";
+import MovieDetail from "./components/MovieDetail/MovieDetail"
+import PageNotFound from "./components/PageNotFound/PageNotFound"
+import Footer from "./components/Footer/Footer"
+import Header from "./components/Header/Header"
 import "./assest/scss/App.scss"
-import MyMovies from "./components/container/MyMovies/MyMovies";
-import AddMovie from "./components/container/AddMovie/AddMovie";
+import MyMovies from "./container/MyMovies/MyMovies";
+import AddMovie from "./components/AddMovie/AddMovie";
+import AllMovies from "./container/AllMovie/AllMovies";
+import Profile from "./container/Profile/Profile";
+import ProtectedRoutes from './ProtectedRoutes';
+import UnProtectedRoutes from './ UnProtectedRoutes';
+
 
 function App() {
   return (
@@ -20,12 +25,63 @@ function App() {
         <Header />
         <div className="container">
           <Routes>
-            <Route path="/login" element={<LogIn />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/reset-password/:otp" element={<ResetPassword />} />
-            <Route path="/verification" element={<Verification />} />
-            <Route path="/movie/:imdbID" element={<MovieDetail />} />
+            {/* login ROUTE */}
+            <Route path="/login" element={
+              <UnProtectedRoutes>
+                <LogIn />
+              </UnProtectedRoutes>
+            } />
+            <Route path="/register" element={
+              <UnProtectedRoutes>
+                <Register />
+              </UnProtectedRoutes>
+            } />
+            <Route path="/forgot-password" element={
+              <UnProtectedRoutes>
+                <ForgotPassword />
+              </UnProtectedRoutes>
+            } />
+            <Route path="/reset-password/:otp" element={
+              <UnProtectedRoutes>
+                <ResetPassword />
+              </UnProtectedRoutes>
+            } />
+            <Route path="/verification" element={
+              <UnProtectedRoutes>
+                <Verification />
+              </UnProtectedRoutes>
+            } />
+            <Route path="/" element={
+              <ProtectedRoutes>
+                <Home />
+              </ProtectedRoutes>
+            } />
+            <Route path="/allmovies" element={
+              // <ProtectedRoutes>
+                <AllMovies />
+              // </ProtectedRoutes>
+
+            } />
+            <Route path="/mymovies" element={
+              // <ProtectedRoutes>
+                <MyMovies />
+              // </ProtectedRoutes>
+            } />
+            <Route path="/addmovie" element={
+              // <ProtectedRoutes>
+                <AddMovie />
+              // </ProtectedRoutes>
+            } />
+            <Route path="/profile" element={
+              // <ProtectedRoutes>
+                <Profile />
+              // </ProtectedRoutes>
+            } />
+            <Route path="/movie/:imdbID" element={
+              // <ProtectedRoutes>
+                <MovieDetail />
+              // </ProtectedRoutes>
+            } />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </div>

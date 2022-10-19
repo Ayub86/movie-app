@@ -1,6 +1,6 @@
 import React from "react"   
 import { Link } from "react-router-dom"
-import "../../../assest/scss/MovieCard.scss"
+import "../../assest/scss/MovieCard.scss"
 
 const MovieCard = (props) => {
     const { data } = props;

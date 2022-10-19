@@ -2,33 +2,36 @@ import React from 'react'
 import { Button, TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { Typography } from "@mui/material";
-import "../../../assest/form.scss"
-import axios from "axios";
+import "../../assest/form.scss"
+import API from "../../utlis/API"
+import { useNavigate } from "react-router-dom";
 
 const ForgotPassword = () => {
+
+  const navigate = useNavigate()
   const { handleSubmit, control } = useForm();
 
   const onSubmit = (data) => {
-    axios
-      .post("https://uploadmoviesapp.herokuapp.com/director/forgotPassword", data)
+
+    console.log(data);
+
+    API.post("/forgotPassword", data)
       .then((response) => {
         console.log("---res", response);
         let message = response?.data?.message;
         //console.log(message);
         alert(`${message}`);
-        //setIsloading(false);
-        // navigate("/login")
+        navigate("/verification")
       })
       .catch((error) => {
         let message = error?.response?.data?.message;
         console.log(message);
         alert(`${message}`);
-        //setIsloading(false);
       });
   };
   return (
     <>
-     <div className="form shadow-lg p-3 mb-5 bg-white rounded">
+      <div className="form shadow-lg p-3 mb-5 bg-white rounded">
         <form>
           <Typography variant="h6" className="text-center">
             Please Enter E-Mail
@@ -63,9 +66,7 @@ const ForgotPassword = () => {
         </form>
       </div>
     </>
-  
-      
-  
+
   )
 }
 
