@@ -8,12 +8,11 @@ import {
 
 const Home = () => {
     const dispatch = useDispatch();
-    const movieText = "Batman"
-    const seriesText = "Friends";
-    // useEffect(() => {
-    //     dispatch(fetchAsyncMovies(movieText))
-    //     dispatch(fetchAsyncShows(seriesText))
-    // }, [])
+
+    useEffect(() => {
+        dispatch(fetchAsyncMovies())
+        dispatch(fetchAsyncShows())
+    }, [])
     return (
         <div>
             <div className="banner-img"></div>
