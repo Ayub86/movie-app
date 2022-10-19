@@ -1,17 +1,24 @@
-import "../../../assest/scss/Header.scss"
-import { Link } from "react-router-dom"
+import "../../assest/scss/Header.scss"
+import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import {
     fetchAsyncMovies,
     fetchAsyncShows,
-} from "../../../redux/features/movies/movieSlice"
+} from "../../redux/features/movies/movieSlice"
 import { useDispatch } from "react-redux"
-import user from "../../../assest/images/user.png"
+import user from "../../assest/images/user.png"
 
 
 const Header = () => {
     const [term, setTerm] = useState("")
     const dispatch = useDispatch();
+    const navigate = useNavigate()
+
+    const handleLogout = () => {
+        localStorage.removeItem("token")
+        navigate("/login")
+    }
+
     const submitHandle = (e) => {
         e.preventDefault()
 
@@ -23,16 +30,8 @@ const Header = () => {
     return (
         <div className="header">
 
-            <div className="logo-main">
-
-                <Link to="/">
-                    IMDb
-                </Link>
-            </div>
-
-            <div className="logo">
+            <div className="pages-link">
                 <ul>
-
                     <li>
                         <Link to="/allmovies">
                             All Movies
@@ -49,9 +48,15 @@ const Header = () => {
                         </Link>
                     </li>
                 </ul>
-
-
             </div>
+
+            <div className="logo-main">
+
+                <Link to="/">
+                    IMDb
+                </Link>
+            </div>
+
             <div className="search-bar">
 
                 <form onSubmit={submitHandle}>
@@ -62,21 +67,31 @@ const Header = () => {
                         placeholder="Search Movies or Shows"
                         onChange={(e) => setTerm(e.target.value)}
                         required />
-                    <i class="fa fa-search"></i>
+                    <i className="fa fa-search"></i>
 
                 </form>
             </div>
 
-            <div className="user-image">
-                <ul className="drop-down">
-                    <img src={user} alt="user" />
-                    <li>
-                        Profile
+            <div className="profile-logout" >
+                <ul>
+
+                    <li >
+                        <Link to="/profile">
+                            Profile
+                        </Link>
                     </li>
-                    <li>
+                    <li onClick={handleLogout}>
                         LogOut
                     </li>
+
                 </ul>
+
+            </div>
+
+            <div className="user-image">
+                <Link to="/profile">
+                    <img src={user} alt="user" />
+                </Link>
             </div>
         </div>
     );
