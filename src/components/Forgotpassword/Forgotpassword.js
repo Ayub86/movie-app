@@ -8,9 +8,9 @@ import { useNavigate } from "react-router-dom";
 
 const ForgotPassword = () => {
   const { handleSubmit, control } = useForm();
-
+   const navigate=useNavigate();
   const onSubmit = (data) => {
-    axios
+    API
       .post("https://uploadmoviesapp.herokuapp.com/director/forgotPassword", data)
       .then((response) => {
         console.log("---res", response);

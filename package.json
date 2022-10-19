@@ -11,12 +11,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.1.2",
-<<<<<<< HEAD
     "bootstrap": "^5.2.2",
-=======
-    "cors": "^2.8.5",
-    "gapi-script": "^1.2.0",
->>>>>>> 9eb597e606aa1606840632adba24ed750427ef3b
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.37.0",

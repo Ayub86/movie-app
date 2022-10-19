@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect } from "react";
 import { Button, TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,55 +10,29 @@ import { useDispatch, useSelector } from "react-redux"
 import { fetchAsyncLogin } from "../../redux/features/movies/movieSlice"
 
 
-const clientId = '350668127338-1dqriq4bcnqtn4dmuvp3pfj2h1jil4fg.apps.googleusercontent.com';
 const LogIn = () => {
-  const Navigate = useNavigate()
-  const onSuccess = (res) => {
-    console.log('Login Success.', res.profileObj);
-    alert(
-      `Logged in successfully.`
-    );
-    Navigate("/")
-    // <Navigate to='/'/>
-  };
-
-  const onFailure = (res) => {
-    console.log('Login failed.', res);
-    alert(
-      `Failed to login.`
-    );
-  };
-
-  useEffect(() => {
-    function start() {
-      gapi.client.init({
-        clientId: clientId,
-        scope: ""
-      })
-    }
-    gapi.load('client:auth2', start)
-  })
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const { handleSubmit, control } = useForm();
-
+  const {success,user} = useSelector((state)=>state.movies)
   const onSubmit = (data) => {
-    axios
-      .post("https://whipz.herokuapp.com/api/v1/user/login", data)
-      .then((response) => {
-        console.log("---res", response);
-        let message = response?.data?.message;
-        //console.log(message);
-        alert(`${message}`);
-        //setIsloading(false);
-        Navigate("/")
-      })
-      .catch((error) => {
-        let message = error?.response?.data?.message;
-        console.log(message);
-        alert(`${message}`);
-        //setIsloading(false);
-      });
+    const { email, password } = data
+    console.log(data,"logindata")
+    dispatch(fetchAsyncLogin({ email, password }))
   };
+
+  const authToken = localStorage.getItem("token")
+  console.log(user,"user");
+
+  // useEffect(() => {
+  //   // console.log("AuthToken", authToken)
+  //   if (success) {
+  //     navigate("/")
+  //   }
+  // }, [])
+
+
   return (
     <>
       <div className="form shadow-lg p-3 mb-5 bg-white rounded">
@@ -109,14 +83,21 @@ const LogIn = () => {
                   placeholder="eg: PassLogin%7"
                 />
               )}
-             // rules={{ required: "Password Required" }}
+              rules={{ required: "Password Required" }}
             />
           </div>
 
           <div className="d-flex justify-content-center mt-4">
-            <button className="btn btn-primary btn-lg  btn-block" onClick={handleSubmit(onSubmit)}>Submit</button>
+            <Button onClick={handleSubmit(onSubmit)}>Submit</Button>
           </div>
-       
+          <div className="signup-link">
+            <Link to="/register">
+              Sign Up?
+            </Link>
+          </div>
+        </form>
+
+      </div>
 
     </>
   );
