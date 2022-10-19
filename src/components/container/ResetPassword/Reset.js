@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Button, TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { Typography } from "@mui/material";
-import "../../../assest/form.scss"
+import "../../../assest/form.css"
 import axios from "axios";
 import * as yup from "yup";
 import useYupValidationResolver from "../../../ValidationSchema";

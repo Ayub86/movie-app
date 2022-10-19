@@ -2,10 +2,11 @@ import React from 'react'
 import { Button, TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { Typography } from "@mui/material";
-import "../../../assest/form.scss"
+import "../../../assest/form.css"
 import axios from "axios";
 import * as yup from 'yup';
 import useYupValidationResolver from "../../../ValidationSchema";
+import API from "../../../utlis/apis/movieApi"
 
 const ForgotPassword = () => {
   const validationSchema = yup.object({
@@ -16,7 +17,7 @@ const ForgotPassword = () => {
 
   const onSubmit = (data) => {
     console.log(data,"for")
-    axios.post("https://uploadmoviesapp.herokuapp.com/director/forgotPassword", data)
+    API.post("/director/forgotPassword", data)
       .then((response) => {
         console.log("---res", response);
         let message = response?.data?.message;
