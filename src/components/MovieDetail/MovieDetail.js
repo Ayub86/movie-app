@@ -9,16 +9,16 @@ import {
 } from "../../redux/features/movies/movieSlice"
 
 const MovieDetail = () => {
-    const { imdbID } = useParams()
+    const { id } = useParams()
     const dispatch = useDispatch()
-    const data = useSelector(getSelectedMovieOrShow)
+    const data = useSelector((state) => state.movies.selectMovieOrShow)
     // console.log(data);
     useEffect(() => {
-        dispatch(fetchAsyncMovieOrShowDetail(imdbID))
+        dispatch(fetchAsyncMovieOrShowDetail(id))
         return () => {
             dispatch(removeSelectedMovieOrShow())
         };
-    }, [dispatch, imdbID])
+    }, [dispatch, id])
     return (
         <div className="movie-section">
             {Object.keys(data).length === 0 ? (
@@ -26,48 +26,48 @@ const MovieDetail = () => {
             ) : (
                 <>
                     <div className="section-left">
-                        <div className="movie-title">{data.Title}</div>
+                        <div className="movie-title">{data.title}</div>
                         <div className="movie-rating">
                             <span>
-                                IMDB Rating <i className="fa fa-star"></i> : {data.imdbRating}
+                                IMDB Rating <i className="fa fa-star"></i> : {data.rating}
                             </span>
-                            <span>
+                            {/* <span>
                                 IMDB Votes <i className="fa fa-thumbs-up"></i> :{" "}
                                 {data.imdbVotes}
                             </span>
                             <span>
                                 Runtime <i className="fa fa-film"></i> : {data.Runtime}
-                            </span>
+                            </span> */}
                             <span>
-                                Year <i className="fa fa-calendar"></i> : {data.Year}
+                                Year <i className="fa fa-calendar"></i> : {data.createdAt}
                             </span>
                         </div>
-                        <div className="movie-plot">{data.Plot}</div>
+                        <div className="movie-plot">{data.discription}</div>
                         <div className="movie-info">
                             <div>
                                 <span>Director</span>
-                                <span>{data.Director}</span>
+                                <span>{data.user}</span>
                             </div>
-                            <div>
+                            {/* <div>
                                 <span>Stars</span>
                                 <span>{data.Actors}</span>
-                            </div>
+                            </div> */}
                             <div>
-                                <span>Generes</span>
-                                <span>{data.Genre}</span>
+                                <span>Sub Titles</span>
+                                <span>{data.sub_titles}</span>
                             </div>
                             <div>
                                 <span>Languages</span>
                                 <span>{data.Language}</span>
                             </div>
                             <div>
-                                <span>Awards</span>
-                                <span>{data.Awards}</span>
+                                <span>Generes</span>
+                                <span>{data.generes}</span>
                             </div>
                         </div>
                     </div>
                     <div className="section-right">
-                        <img src={data.Poster} alt={data.Title} />
+                        <img src={data.cover_photo} alt={data.title} />
                     </div>
                 </>
             )}

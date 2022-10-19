@@ -77,7 +77,7 @@ function App() {
                 <Profile />
               // </ProtectedRoutes>
             } />
-            <Route path="/movie/:imdbID" element={
+            <Route path="/movie/:id" element={
               // <ProtectedRoutes>
                 <MovieDetail />
               // </ProtectedRoutes>

@@ -18,19 +18,12 @@ const LogIn = () => {
   const {success,user} = useSelector((state)=>state.movies)
   const onSubmit = (data) => {
     const { email, password } = data
-    console.log(data,"logindata")
     dispatch(fetchAsyncLogin({ email, password }))
   };
-
+  
   const authToken = localStorage.getItem("token")
   console.log(user,"user");
-
-  // useEffect(() => {
-  //   // console.log("AuthToken", authToken)
-  //   if (success) {
-  //     navigate("/")
-  //   }
-  // }, [])
+  
 
 
   return (
