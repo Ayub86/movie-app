@@ -1,10 +1,10 @@
 import "../../assest/scss/Details.scss"
 
 const Details = (props) => {
-    // const  {data}  = props
+    const  {data}  = props
     // console.log("data000",data);
     // const title=props.title
-    console.log("props--->",props)
+    console.log("props--->",props.title)
 
     // const { title, sub_titles, cover_photo, description, generes, languages, rating, createdAt } = props
     // console.log(title);
