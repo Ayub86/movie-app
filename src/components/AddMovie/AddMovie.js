@@ -1,7 +1,7 @@
 import { Button, TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { Typography } from "@mui/material";
-import "../../assest/form.scss"
+
 import API from "../../utlis/API"
 
 const AddMovie = () => {

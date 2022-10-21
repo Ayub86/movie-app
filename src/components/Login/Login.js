@@ -25,12 +25,6 @@ const LogIn = () => {
   const authToken = localStorage.getItem("token")
   console.log(user,"user");
 
-  // useEffect(() => {
-  //   // console.log("AuthToken", authToken)
-  //   if (success) {
-  //     navigate("/")
-  //   }
-  // }, [])
 
 
   return (
