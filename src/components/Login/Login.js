@@ -16,15 +16,15 @@ const LogIn = () => {
 
   const { handleSubmit, control } = useForm();
   const {success,user} = useSelector((state)=>state.movies)
+
   const onSubmit = (data) => {
     const { email, password } = data
-    console.log(data,"logindata")
     dispatch(fetchAsyncLogin({ email, password }))
   };
-
+  
   const authToken = localStorage.getItem("token")
   console.log(user,"user");
-
+  
 
 
   return (

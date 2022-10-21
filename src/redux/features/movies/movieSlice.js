@@ -1,7 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
-import { findAllInRenderedTree } from "react-dom/test-utils";
-// import movieApi from "../../utlis/apis/movieApi"
-// import { APIKey } from "../../utlis/apis/movieApiKey"
+
 import API from "../../../utlis/API"
 
 export const fetchAsyncLogin = createAsyncThunk(
@@ -9,17 +7,14 @@ export const fetchAsyncLogin = createAsyncThunk(
     async ({ email, password }) => {
         try {
             const response = await API.post("/login", { email, password })
-          //  console.log("---res", response.data);
-            let  token  = response.data.token
-             console.log("token===>",token);
-            localStorage.setItem("token",token)
+            let token = response.data.token
+            localStorage.setItem("token", token)
             let message = response?.data?.message;
-           // alert(`${message}`)
+            // alert(`${message}`)
             return response?.data
         } catch (error) {
             let message = error?.response?.data?.message;
-            //alert(`${message}`)
-            // console.log(message);
+            // alert(`${message}`)
         }
     }
 )
@@ -28,16 +23,14 @@ export const fetchAsyncMovies = createAsyncThunk(
     "movies/fetchAsyncMovies",
     async () => {
         try {
-            const response = await API.get("/all-movies", )
-            console.log("---movies", response.data);
-          
+            const response = await API.get("/all-movies")
             let message = response?.data?.message;
-           // alert(`${message}`)
+            console.log("res", response)
+            // alert(`${message}`)
             return response?.data
         } catch (error) {
             let message = error?.response?.data?.message;
-           // alert(`${message}`)
-            // console.log(message);
+            // alert(`${message}`)
         }
     }
        
@@ -46,32 +39,49 @@ export const fetchAsyncMovies = createAsyncThunk(
 
 export const fetchAsyncShows = createAsyncThunk(
     "movies/fetchAsyncShows",
-    
     async () => {
         try {
-            const response = await API.get("/all-shows", )
-            console.log("---movies", response.data);
-          
+            const response = await API.get("/all-shows")
             let message = response?.data?.message;
-          //  alert(`${message}`)
+            console.log("res", response)
+            // alert(`${message}`)
             return response?.data
         } catch (error) {
             let message = error?.response?.data?.message;
-            alert(`${message}`)
-            // console.log(message);
+            // alert(`${message}`)
         }
     }
 )
 
-export const fetchAsyncMovieOrShowDetail = createAsyncThunk(
-    "movies/fetchAsyncMovieOrShowDetail",
+export const fetchAsyncMovieDetail = createAsyncThunk(
+    "movies/fetchAsyncMovieDetail",
     async (id) => {
-        const response = await API.get(`?apiKey=${API}&i=${id}&Plot=full`)
-        return response.data
-    }
-);
+        try {
+            const response = await API.get(`/all-movies/${id}`)
+            let message = response?.data?.message;
+            console.log("single-movie", response)
+            // alert(`${message}`)
+            return response?.data
+        } catch (error) {
+            let message = error?.response?.data?.message;
+            // alert(`${message}`)
+        }
+    })
 
-//const userToken = localStorage.getItem("token")
+export const fetchAsyncShowDetail = createAsyncThunk(
+    "movies/fetchAsyncShowDetail",
+    async (id) => {
+        try {
+            const response = await API.get(`/all-shows/${id}`)
+            let message = response?.data?.message;
+            console.log("single-show", response)
+            // alert(`${message}`)
+            return response?.data
+        } catch (error) {
+            let message = error?.response?.data?.message;
+            // alert(`${message}`)
+        }
+    })
 
 const initialState = {
     user: null,
@@ -97,8 +107,8 @@ const movieSlice = createSlice({
             state.error = null
         },
         [fetchAsyncLogin.fulfilled]: (state, { payload }) => {
-            console.log("Fetched Successfully!")
-            console.log("payload",payload)
+            console.log("Login Fetched Successfully!")
+            // console.log("payload",  payload )
             state.laoding = false
             state.user = payload
             state.success = true
@@ -112,47 +122,71 @@ const movieSlice = createSlice({
         [fetchAsyncMovies.pending]: (state) => {
             state.loading = true
             state.error = null
-            
         },
         [fetchAsyncMovies.fulfilled]: (state, { payload }) => {
-            //console.log("Fetched Successfully!")
-            //console.log("payloadfetched",payload)
-            state.laoding = false
-            state.movies = payload
-            state.success = true
-         
+            console.log("Movies Fetched Successfully!")
+            console.log("payload", payload)
+            // state.laoding = false
+            // state.success = true
+            return { ...state, movies: payload }
         },
         [fetchAsyncMovies.rejected]: (state, payload) => {
             state.loading = false
             state.error = payload
         },
+
         [fetchAsyncShows.pending]: (state) => {
             state.loading = true
             state.error = null
-            
         },
+
         [fetchAsyncShows.fulfilled]: (state, { payload }) => {
-            //console.log("Fetched Successfully!")
-            //console.log("payloadfetched",payload)
-            state.laoding = false
-            state.shows = payload
-            state.success = true
-         
+            console.log("Shows Fetched Successfully!")
+            console.log("payload", payload)
+            // state.laoding = false
+            // state.success = true
+            return { ...state, shows: payload }
         },
+
         [fetchAsyncShows.rejected]: (state, payload) => {
             state.loading = false
             state.error = payload
         },
-        [fetchAsyncMovieOrShowDetail.fulfilled]: (state, { payload }) => {
-            console.log("Fetched Successfully!")
+
+        [fetchAsyncMovieDetail.pending]: (state) => {
+            state.loading = true
+            state.error = null
+        },
+        [fetchAsyncMovieDetail.fulfilled]: (state, { payload }) => {
+           console.log("MovieDetail Fetched Successfully!",payload)
+            state.laoding = false
+            state.selectMovieOrShow = payload
+            state.success = true
+           // return { ...state, selectMovieOrShow: payload }
+        },
+        [fetchAsyncMovieDetail.rejected]: (state, payload) => {
+            state.loading = false
+            state.error = payload
+        },
+
+        [fetchAsyncShowDetail.pending]: (state) => {
+            state.loading = true
+            state.error = null
+        },
+        [fetchAsyncShowDetail.fulfilled]: (state, { payload }) => {
+            console.log("ShowDetail Fetched Successfully!")
             return { ...state, selectMovieOrShow: payload }
+        },
+        [fetchAsyncShowDetail.rejected]: (state, payload) => {
+            state.loading = false
+            state.error = payload
         },
     },
 });
 
 export const { removeSelectedMovieOrShow } = movieSlice.actions
-//export const userLogin =(state)=> state.movies.user
-export const getAllMovies = (state) => state.movies.movies
-export const getAllShows = (state) => state.movies.shows
-export const getSelectedMovieOrShow = (state) => state.movies.selectMovieOrShow
+// export const userLogin = (state) => state.movies.user
+// export const getAllMovies = (state) => state.movies.movies
+// export const getAllShows = (state) => state.movies.shows
+// export const getSelectedMovieOrShow = (state) => state.movies.selectMovieOrShow
 export default movieSlice.reducer
