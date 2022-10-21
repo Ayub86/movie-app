@@ -14,9 +14,13 @@ const Header = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate()
 
+
     const handleLogout = () => {
         localStorage.removeItem("token")
         navigate("/login")
+    }
+    const handleChange =(e)=>{
+        navigate("/allmovies")
     }
 
     const submitHandle = (e) => {
@@ -33,7 +37,7 @@ const Header = () => {
             <div className="pages-link">
                 <ul>
                     <li>
-                        <Link to="/allmovies">
+                        <Link to="/allmovies" >
                             All Movies
                         </Link>
                     </li>

@@ -12,8 +12,8 @@ import MyMovies from "./container/MyMovies/MyMovies";
 import AddMovie from "./components/AddMovie/AddMovie";
 import AllMovies from "./container/AllMovie/AllMovies";
 import Profile from "./container/Profile/Profile";
-import ProtectedRoutes from './ProtectedRoutes';
-import UnProtectedRoutes from './ UnProtectedRoutes';
+import ProtectedRoutes from "./ProtectedRoutes";
+import UnProtectedRoutes from "./ UnProtectedRoutes";
 import "./assest/scss/App.scss"
 import MovieDetail from "./components/MovieDetail/MovieDetail";
 import ShowDetail from "./components/ShowDetail/ShowDetail";
