@@ -10,9 +10,6 @@ const MovieListing = () => {
     console.log(movies, "movies")
     console.log(shows, "shows")
 
-
-    //const movies = useSelector(getAllMovies)
-    // const shows = useSelector(getAllShows)
     let renderMovies,
         renderShows = "";
 
@@ -34,13 +31,8 @@ const MovieListing = () => {
 
 
 
-    // shows.Response === "True" ? (
-    //     shows.Search.map((movie, index) => <MovieCard key={index} data={movie} />)
-    // ) : (
-    //     <div className="shows-error">
-    //         <h3>{shows.Error}</h3>
-    //     </div>
-    // );
+    
+            
     return (
         <div className="movie-wrapper">
             <div className="movie-list">

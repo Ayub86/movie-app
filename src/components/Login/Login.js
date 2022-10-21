@@ -16,6 +16,7 @@ const LogIn = () => {
 
   const { handleSubmit, control } = useForm();
   const {success,user} = useSelector((state)=>state.movies)
+
   const onSubmit = (data) => {
     const { email, password } = data
     dispatch(fetchAsyncLogin({ email, password }))
