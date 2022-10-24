@@ -1,7 +1,13 @@
+<<<<<<< HEAD
 import React from "react"
 import { useSelector } from "react-redux"
+=======
+import React from "react";
+import { useSelector } from "react-redux";
+
+>>>>>>> 116164a4a6daa4ba27f3568e210e02c478922d41
 import MovieCard from "../MovieCard/MovieCard";
-import "../../assest/scss/MovieListing.scss"
+import "../../assest/scss/MovieListing.scss";
 
 const MovieListing = () => {
     const movies = useSelector((state) => state.movies.movies)
@@ -45,4 +51,4 @@ const MovieListing = () => {
     )
 }
 
-export default MovieListing
+export default MovieListing;

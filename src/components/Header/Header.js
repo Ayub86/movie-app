@@ -14,9 +14,13 @@ const Header = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate()
 
+
     const handleLogout = () => {
         localStorage.removeItem("token")
         navigate("/login")
+    }
+    const handleChange =(e)=>{
+        navigate("/allmovies")
     }
 
     const submitHandle = (e) => {
@@ -32,8 +36,13 @@ const Header = () => {
 
             <div className="pages-link">
                 <ul>
+<<<<<<< HEAD
                     <li onClick={()=>{alert("helllo")}}>
                         <Link to="/allmovies">
+=======
+                    <li>
+                        <Link to="/allmovies" >
+>>>>>>> 116164a4a6daa4ba27f3568e210e02c478922d41
                             All Movies
                         </Link>
                     </li>

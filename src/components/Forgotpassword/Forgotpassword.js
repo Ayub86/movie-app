@@ -7,15 +7,11 @@ import API from "../../utlis/API"
 import { useNavigate } from "react-router-dom";
 
 const ForgotPassword = () => {
-
-  const navigate = useNavigate()
   const { handleSubmit, control } = useForm();
-
+   const navigate=useNavigate();
   const onSubmit = (data) => {
-
-    console.log(data);
-
-    API.post("/forgotPassword", data)
+    API
+      .post("https://uploadmoviesapp.herokuapp.com/director/forgotPassword", data)
       .then((response) => {
         console.log("---res", response);
         let message = response?.data?.message;

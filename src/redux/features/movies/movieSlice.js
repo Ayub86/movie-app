@@ -64,6 +64,8 @@ export const fetchAsyncMovies = createAsyncThunk(
             console.log(message)
         }
     }
+       
+    
 )
 
 export const fetchAsyncShows = createAsyncThunk(
@@ -123,7 +125,7 @@ const initialState = {
     selectMovieOrShow: {},
     loading: false,
     success: false,
-    // userToken,
+    //userToken,
 };
 
 const movieSlice = createSlice({
@@ -145,7 +147,7 @@ const movieSlice = createSlice({
             state.laoding = false
             state.user = payload
             state.success = true
-            // state.userToken = payload.userToken
+            state.userToken = payload.userToken
         },
         [fetchAsyncLogin.rejected]: (state, payload) => {
             state.loading = false
