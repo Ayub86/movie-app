@@ -22,7 +22,7 @@ const MovieDetail = () => {
 
     const { selectMovieOrShow } = movies;
     const { movie } = selectMovieOrShow;
-    console.log("0000000000", movie);
+   // console.log("0000000000", movie);
 
 
     return (
