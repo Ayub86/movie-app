@@ -1,11 +1,11 @@
-import { Navigate ,Outlet} from "react-router"
+import { Navigate } from "react-router"
 
-const ProtectedRoutes = () => {
+const ProtectedRoutes = ({ children }) => {
 
     const isAuth = localStorage.getItem("token")
 
-   // console.log('ProtectedRoutes:', isAuth)
-    return isAuth ? <Outlet/> : <Navigate to='/login' />
+    console.log('ProtectedRoutes:', isAuth)
+    return isAuth ? children : <Navigate to='/login' />
 
 }
 

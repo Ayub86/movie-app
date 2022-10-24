@@ -10,7 +10,7 @@ import Details from "../Details/Details"
 const MovieDetail = () => {
     const movies = useSelector((state) => state.movies)
     console.log("moviedata", movies)
-
+    // const  email  = useSelector((state) => state.movies.user.email)
     const { id } = useParams()
     const dispatch = useDispatch()
     useEffect(() => {
@@ -22,7 +22,7 @@ const MovieDetail = () => {
 
     const { selectMovieOrShow } = movies;
     const { movie } = selectMovieOrShow;
-    console.log("0000000000", movie);
+   // console.log("0000000000", movie);
 
 
     return (
