@@ -8,24 +8,25 @@ import {
 import Details from "../Details/Details"
 
 const ShowDetail = () => {
-    const data = useSelector((state) => state.movies)
-    console.log("showdetail",data)
-    // const  email  = useSelector((state) => state.movies.user.email)
-    console.log("showuseSelector====>", data)
+    const shows = useSelector((state) => state.movies)
+
     const { id } = useParams()
-    console.log("showid====>", id)
     const dispatch = useDispatch()
-    console.log("showdata==>", data);
     useEffect(() => {
         dispatch(fetchAsyncShowDetail(id))
         return () => {
             dispatch(removeSelectedMovieOrShow())
         };
-    }, [dispatch,id])
+    }, [dispatch, id])
+
+    console.log("showdata", shows)
+    const { selectMovieOrShow } = shows;
+    const { show } = selectMovieOrShow;
+    console.log("0000000000", show);
 
     return (
         <div>
-            <Details data={data} />
+            <Details data={show} />
         </div>
     )
 }

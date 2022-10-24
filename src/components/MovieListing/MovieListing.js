@@ -1,6 +1,5 @@
 import React from "react"
 import { useSelector } from "react-redux"
-import { getAllMovies, getAllShows } from "../../redux/features/movies/movieSlice"
 import MovieCard from "../MovieCard/MovieCard";
 import "../../assest/scss/MovieListing.scss"
 
@@ -31,8 +30,7 @@ const MovieListing = () => {
 
 
 
-    
-            
+
     return (
         <div className="movie-wrapper">
             <div className="movie-list">

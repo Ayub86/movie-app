@@ -73,7 +73,7 @@ function App() {
               <AddMovie />
               // </ProtectedRoutes>
             } />
-            <Route path="/profile" element={
+            <Route path="/profile/:id" element={
               // <ProtectedRoutes>
               <Profile />
               // </ProtectedRoutes>

@@ -32,7 +32,7 @@ const Header = () => {
 
             <div className="pages-link">
                 <ul>
-                    <li>
+                    <li onClick={()=>{alert("helllo")}}>
                         <Link to="/allmovies">
                             All Movies
                         </Link>
@@ -43,7 +43,7 @@ const Header = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/addmovies">
+                        <Link to="/addmovie">
                             Add Movie
                         </Link>
                     </li>
@@ -76,7 +76,7 @@ const Header = () => {
                 <ul>
 
                     <li >
-                        <Link to="/profile">
+                        <Link to="/profile/:id">
                             Profile
                         </Link>
                     </li>
