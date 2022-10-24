@@ -5,17 +5,18 @@ import Register from "./components/Register/Register";
 import ForgotPassword from "./components/Forgotpassword/Forgotpassword";
 import ResetPassword from "./components/ResetPassword/Reset";
 import Verification from "./components/Verification/Verification";
-import MovieDetail from "./components/MovieDetail/MovieDetail"
 import PageNotFound from "./components/PageNotFound/PageNotFound"
 import Footer from "./components/Footer/Footer"
 import Header from "./components/Header/Header"
-import "./assest/scss/App.scss"
 import MyMovies from "./container/MyMovies/MyMovies";
 import AddMovie from "./components/AddMovie/AddMovie";
 import AllMovies from "./container/AllMovie/AllMovies";
 import Profile from "./container/Profile/Profile";
 import ProtectedRoutes from './ProtectedRoutes';
 import UnProtectedRoutes from './ UnProtectedRoutes';
+import "./assest/scss/App.scss"
+import MovieDetail from "./components/MovieDetail/MovieDetail";
+import ShowDetail from "./components/ShowDetail/ShowDetail";
 
 
 function App() {
@@ -58,28 +59,33 @@ function App() {
             } />
             <Route path="/allmovies" element={
               // <ProtectedRoutes>
-                <AllMovies />
+              <AllMovies />
               // </ProtectedRoutes>
 
             } />
             <Route path="/mymovies" element={
               // <ProtectedRoutes>
-                <MyMovies />
+              <MyMovies />
               // </ProtectedRoutes>
             } />
             <Route path="/addmovie" element={
               // <ProtectedRoutes>
-                <AddMovie />
+              <AddMovie />
               // </ProtectedRoutes>
             } />
             <Route path="/profile" element={
               // <ProtectedRoutes>
-                <Profile />
+              <Profile />
               // </ProtectedRoutes>
             } />
             <Route path="/movie/:id" element={
               // <ProtectedRoutes>
-                <MovieDetail />
+              <MovieDetail />
+              // </ProtectedRoutes>
+            } />
+            <Route path="/show/:id" element={
+              // <ProtectedRoutes>
+              <ShowDetail />
               // </ProtectedRoutes>
             } />
             <Route path="*" element={<PageNotFound />} />

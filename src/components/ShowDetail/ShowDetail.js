@@ -2,34 +2,32 @@ import React, { useEffect } from "react"
 import { useParams } from "react-router"
 import { useDispatch, useSelector } from "react-redux"
 import {
-    fetchAsyncMovieDetail,
+    fetchAsyncShowDetail,
     removeSelectedMovieOrShow,
 } from "../../redux/features/movies/movieSlice"
 import Details from "../Details/Details"
 
-const MovieDetail = () => {
-    const movies = useSelector((state) => state.movies)
-    console.log("moviedata", movies)
+const ShowDetail = () => {
+    const data = useSelector((state) => state.movies)
+    console.log("showdetail",data)
     // const  email  = useSelector((state) => state.movies.user.email)
+    console.log("showuseSelector====>", data)
     const { id } = useParams()
+    console.log("showid====>", id)
     const dispatch = useDispatch()
+    console.log("showdata==>", data);
     useEffect(() => {
-        dispatch(fetchAsyncMovieDetail(id))
+        dispatch(fetchAsyncShowDetail(id))
         return () => {
             dispatch(removeSelectedMovieOrShow())
         };
-    }, [dispatch, id])
-
-    const { selectMovieOrShow } = movies;
-    const { movie } = selectMovieOrShow;
-    console.log("0000000000", movie);
-
+    }, [dispatch,id])
 
     return (
         <div>
-            <Details data={movie} />
+            <Details data={data} />
         </div>
     )
 }
 
-export default MovieDetail
+export default ShowDetail
